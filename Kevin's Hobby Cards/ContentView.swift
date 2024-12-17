@@ -7,18 +7,27 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct hobbyCardView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List {
+            ForEach(listOfItems) { currentItem in
+                NavigationLink(destination: DetailView(player: currentItem),
+                               label: {
+                    ListItem(image: currentItem.faceImage,
+                             title: currentItem.name,
+                             subtitle: currentItem.subtitle)
+                    
+                })
+            }
         }
-        .padding()
+        .navigationTitle("My favourite stars!")
     }
 }
 
-#Preview {
-    ContentView()
+struct CardsListView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView{
+            hobbyCardView()
+        }
+    }
 }
